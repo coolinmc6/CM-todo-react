@@ -8,4 +8,4 @@ React ToDo app
   - actually update the todo
   - place that todo back in the array
 - **Find the Todo**
-  - 
+  - I used a helper function that finds the todo by its id and returns it
