@@ -5,8 +5,8 @@ import TodoList from './TodoList';
 class App extends Component {
   render() {
     return (
-        <div>
-            Hello from the App!
+        <div id="main">
+            <h1>React ToDo List</h1>
             <TodoList />
         </div>
     );

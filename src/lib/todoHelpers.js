@@ -12,3 +12,14 @@ export const updateTodo = (list, updated) => {
 						...list.slice(todoIndex+1)]
 	return updateList;
 }
+
+export const deleteTodo = (list, id) => {
+
+	// find todo to delete
+	const todoIndex = list.findIndex((item) => item.id === id);
+
+	// delete todo from array
+	const newList = [...list.slice(0,todoIndex),
+					...list.slice(todoIndex+1)]
+	return newList;
+}

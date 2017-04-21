@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { generateID, findByID, toggleTodo, updateTodo } from './lib/todoHelpers'
+import { generateID, findByID, toggleTodo, updateTodo, deleteTodo } from './lib/todoHelpers'
 
 export default class TodoList extends Component {
 
@@ -31,19 +31,34 @@ export default class TodoList extends Component {
 		
 	}
 	changeCompleteStatus(id) {
-		console.log(id)
 		// find item with that id
 		const todoINeed = findByID(id, this.state.todos)
-		console.log(todoINeed);
+		
 		// toggle status from false to true
 		const updatedTodo = toggleTodo(todoINeed);
-		console.log(updatedTodo)
+		
 		// update array => find index of item in the array
 		const updatedTodos = updateTodo(this.state.todos,updatedTodo)
-		console.log(updatedTodos);
+		
+		// update state
 		this.setState({
 			todos: updatedTodos
 		})
+	}
+	deleteTodoItem(id) {
+		
+		console.log(id);
+
+
+		const newTodos = deleteTodo(this.state.todos, id);
+		console.log(newTodos);
+
+
+		// update state
+		this.setState({
+			todos: newTodos
+		})
+
 	}
 	renderList() {
 		this.state.todos.map((todo) => {
@@ -54,16 +69,21 @@ export default class TodoList extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<input onChange={this.onInputChange} value={this.state.term}/>
-				<button type="submit" onClick={this.createTodo}>Add ToDo</button>
-				<div>
+			<div className="todolist-main">
+				<input onChange={this.onInputChange} value={this.state.term} name="addTodo"/>
+				<button type="submit" onClick={this.createTodo} className="add-btn">Add ToDo</button>
+				<div className="todolist">
 					{this.renderList}
 					{this.state.todos.map((todo) => {
 						return (
 							<div key={todo.id} 
 								onClick={() => this.changeCompleteStatus(todo.id)}
-								className={todo.complete ? 'complete' : ''}>{todo.item}</div>
+								className={`todo-item ${todo.complete ? 'complete' : ''}`}>
+								{todo.item}
+								<a className="delete-item" 
+									data-id={todo.id}
+									onClick={() => this.deleteTodoItem(todo.id)}>X</a>
+							</div>
 						)
 					})}
 				</div>
