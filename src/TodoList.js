@@ -12,7 +12,7 @@ export default class TodoList extends Component {
 			todos: [{ item: "Welcome to Colin's React Todo List!", id: 1, complete: false},
 			{ item: "Click an item to mark it complete or incomplete.", id: 2, complete: true},
 			{ item: "Use the filters to show all items or only the completed or not yet completed items.", id: 3, complete: false},
-			{ item: "Click the red X to delete it...though you could've probably figured that out", id: 1, complete: false}],
+			{ item: "Click the red X to delete it...though you could've probably figured that out", id: 4, complete: false}],
 			filter: 'all'
 		}
 		this.onInputChange = this.onInputChange.bind(this);
