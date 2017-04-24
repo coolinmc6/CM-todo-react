@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { generateID, findByID, toggleTodo, updateTodo, deleteTodo } from './lib/todoHelpers'
 
+// import Filter from './Filter';
+
 export default class TodoList extends Component {
 
 	constructor() {
 		super();
 		this.state = {
 			term: '',
-			todos: []
+			todos: [],
+			filter: 'all'
 		}
 		this.onInputChange = this.onInputChange.bind(this);
 		this.createTodo = this.createTodo.bind(this);
 		this.renderList = this.renderList.bind(this)
-
+		this.filterTodos = this.filterTodos.bind(this);
+		this.changeFilter = this.changeFilter.bind(this);
 	}
 
 	onInputChange(e) {
@@ -45,15 +49,9 @@ export default class TodoList extends Component {
 			todos: updatedTodos
 		})
 	}
-	deleteTodoItem(id) {
-		
-		console.log(id);
-
-
+	deleteTodoItem(id, e) {
+		e.preventDefault();
 		const newTodos = deleteTodo(this.state.todos, id);
-		console.log(newTodos);
-
-
 		// update state
 		this.setState({
 			todos: newTodos
@@ -67,22 +65,55 @@ export default class TodoList extends Component {
 			)
 		})
 	}
+	filterTodos(filter) {
+		switch(filter) {
+			case 'complete':
+				return this.state.todos.filter((todo) => todo.complete === true)
+			case 'incomplete':
+				return this.state.todos.filter((todo) => todo.complete === false)
+			default:
+				return this.state.todos;
+		}
+	}
+	changeFilter(filter,e) {
+		e.preventDefault();
+		this.setState({
+			filter: filter
+		})
+	}
 	render() {
 		return (
 			<div className="todolist-main">
+				
+				<div>
+					<a href="#" 
+						onClick={(e) => this.changeFilter('all', e)}
+						className="filter-link">
+							All</a>&nbsp;&nbsp;
+					<a href="#" 
+						onClick={(e) => this.changeFilter('complete', e)}
+						className="filter-link">
+							Completed</a>&nbsp;&nbsp;
+					<a href="#" 
+						onClick={(e) => this.changeFilter('incomplete', e)}
+						className="filter-link">
+							Incomplete</a>
+					<br />
+				</div>
 				<input onChange={this.onInputChange} value={this.state.term} name="addTodo"/>
 				<button type="submit" onClick={this.createTodo} className="add-btn">Add ToDo</button>
 				<div className="todolist">
 					{this.renderList}
-					{this.state.todos.map((todo) => {
+					{this.filterTodos(this.state.filter).map((todo) => {
 						return (
-							<div key={todo.id} 
-								onClick={() => this.changeCompleteStatus(todo.id)}
-								className={`todo-item ${todo.complete ? 'complete' : ''}`}>
-								{todo.item}
+							<div key={todo.id} className="todo-holder">
+								<div onClick={() => this.changeCompleteStatus(todo.id)}
+									className={`todo-item ${todo.complete ? 'complete' : ''}`}>
+									{todo.item}
+								</div>
 								<a className="delete-item" 
 									data-id={todo.id}
-									onClick={() => this.deleteTodoItem(todo.id)}>X</a>
+									onClick={(e) => this.deleteTodoItem(todo.id, e)}>X</a>
 							</div>
 						)
 					})}

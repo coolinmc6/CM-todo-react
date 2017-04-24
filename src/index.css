@@ -29,12 +29,14 @@ input[name="addTodo"] {
 	font-size: 1.05rem;
 
 }
-
+.todo-holder {
+	position: relative;
+}
 .todo-item {
 	padding: 1rem;
 	text-align: left;
 	border-top: 1px dashed #777;
-	position: relative;
+	
 }
 .complete {
   text-decoration: line-through;
@@ -49,10 +51,18 @@ input[name="addTodo"] {
 	text-decoration: none;
 	font-family: sans-serif;
 	padding: 0.5rem;
+	cursor: pointer;
 }
 .delete-item:hover {
 	border-radius: 4px;
 	background-color: #ddd;
 	opacity: 0.8;
 	
+}
+.filter-link {
+	display: inline-block;
+	padding: 0.15rem;
+	color: blue;
+	text-decoration: none;
+	font-size: 1.1rem;
 }
