@@ -14,8 +14,36 @@ React ToDo app
 - **Find the Todo**
   - I used a helper function that finds the todo by its id and returns it
 
+## Deploy to GitHub
+1. Add `homepage` to `package.json`		
+```json
+"homepage": "https://coolinmc6.github.io/CM-todo-react",	
+```
 
-### GitHub Pages
+2. Install GH-Pages	
+```js	
+npm install --save-dev gh-pages	
+```
+		
+3. Add scripts to package.json
+
+```js
+scripts: {	
+	// ...
+	predeploy: "npm run build",
+	deploy: "gh-pages -d build"
+}
+```
+
+4. Deploy the site		
+```sh
+npm run deploy	
+```
+	
+5. Enable GH-Pages on GitHub (settings, source GH-Pages)		
+
+
+### Raw Facebook: GitHub Pages
 
 >Note: this feature is available with `react-scripts@0.2.0` and higher.
 
