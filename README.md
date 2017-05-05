@@ -1,10 +1,9 @@
 # README
 
-React ToDo app
+React ToDo app => the completed app has been deployed to GH-Pages [https://coolinmc6.github.io/CM-todo-react/](https://coolinmc6.github.io/CM-todo-react/).
 
 **Next Steps**
 - brief write-up on what this app does
-- Deploy to GitHub
 
 ## Updating a Todo
 - Updating a todo was difficult but here are the basics:
